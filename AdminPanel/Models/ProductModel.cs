@@ -1,4 +1,4 @@
-﻿namespace WebAPI_Test.Models;
+﻿namespace AdminPanel.Models;
 
 public class ProductModel
 {
