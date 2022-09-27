@@ -6,5 +6,5 @@ public interface IProductDb
 {
 	Task<List<ProductModel>> GetAllProducts();
 	Task<List<ProductModel>> GetProductByName(string name);
-	Task<ProductModel> GetProductsById(Guid id);
+	Task<ProductModel> GetProductsById(int id);
 }

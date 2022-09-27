@@ -1,22 +1,31 @@
-﻿using WebAPI_Test.DataAccessLayer.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using WebAPI_Test.DataAccessLayer.Interfaces;
 using WebAPI_Test.Models;
 
 namespace WebAPI_Test.DataAccessLayer.Implementations;
 
 public class ProductDb : IProductDb
 {
-	async public Task<List<ProductModel>> GetAllProducts()
+	public async Task<List<ProductModel>> GetAllProducts()
 	{
-		throw new NotImplementedException();
+		await using (ApplicationContext context = new()) {
+			return await context.Product.ToListAsync();
+		}
+	}
+	public async Task<List<ProductModel>> GetProductByName(string name)
+	{
+		await using (ApplicationContext context = new()) {
+			Task<List<ProductModel>> categories 
+					= context.Product.Where(p =>
+							                        EF.Functions.Like(p.Name!, $"%{name}%")).ToListAsync();
+			return await categories;
+		}
 	}
 
-	async public Task<List<ProductModel>> GetProductByName(string name)
+	public async Task<ProductModel?> GetProductsById(int id)
 	{
-		throw new NotImplementedException();
-	}
-
-	async public Task<ProductModel> GetProductsById(Guid id)
-	{
-		throw new NotImplementedException();
+		await using (ApplicationContext context = new()) {
+			return await context.Product.FindAsync(id);
+		}
 	}
 }

@@ -11,24 +11,24 @@ public class ProductController : ControllerBase
 	private readonly IProductBl _productBl;
 	public ProductController(IProductBl productBl) => _productBl = productBl;
 
-	[HttpGet]
+	[HttpGet("GetAll")]
 	public async Task<ActionResult<List<ProductModel>>> GetAllProducts()
 	{
 		List<ProductModel> productModels = await _productBl.GetAllProducts();
-		return new JsonResult(productModels);
+		return Ok(new JsonResult(productModels));
 	}
 
-	[HttpGet("{name}")]
+	[HttpGet("GetByName/{name}")]
 	public async Task<ActionResult<List<ProductModel>>> GetProductByName(string name)
 	{
 		List<ProductModel> productByName = await _productBl.GetProductByName(name);
-		return new JsonResult(productByName);
+		return Ok(new JsonResult(productByName));
 	}
 
-	[HttpGet("{id}")]
-	public async Task<ActionResult<ProductModel>> GetProductById(Guid id)
+	[HttpGet("GetById/{id}")]
+	public async Task<ActionResult<ProductModel>> GetProductById(int id)
 	{
 		ProductModel productById = await _productBl.GetProductById(id);
-		return new JsonResult(productById);
+		return Ok(new JsonResult(productById));
 	}
 }
