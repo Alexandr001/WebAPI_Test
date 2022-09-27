@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebAPI_Test.BusinessLayer.Implementations;
 using WebAPI_Test.BusinessLayer.Interfaces;
+using WebAPI_Test.DataAccessLayer.Implementations;
 using WebAPI_Test.Models;
 
 namespace WebAPI_Test.Controllers;
@@ -11,10 +13,10 @@ public class ProductController : ControllerBase
 	private readonly IProductBl _productBl;
 	public ProductController(IProductBl productBl) => _productBl = productBl;
 
-	[HttpGet("GetAll")]
-	public async Task<ActionResult<List<ProductModel>>> GetAllProducts()
+	[HttpGet("GetAll/{filtration?}")]
+	public async Task<ActionResult<List<ProductModel>>> GetAllProducts(Filtration? filtration)
 	{
-		List<ProductModel> productModels = await _productBl.GetAllProducts();
+		List<ProductModel> productModels = await _productBl.GetAllProducts(filtration);
 		return Ok(new JsonResult(productModels));
 	}
 
