@@ -1,0 +1,20 @@
+﻿@using AdminPanel.Models
+@model IEnumerable<AdminPanel.Models.CategoryModel>
+@{
+    ViewBag.Title = "Category";
+}
+
+<a href="/Category/Create">Добавить категорию</a>
+<h1>Список категорий:</h1>
+<table>
+     <tr><th>Id</th><th>Name</th><th>Image</th><th>Products</th></tr>
+    @foreach (CategoryModel item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Image</td>
+            <td>@item.Products</td>
+        </tr>
+    }
+</table>

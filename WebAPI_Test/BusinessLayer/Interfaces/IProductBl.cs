@@ -2,9 +2,9 @@
 
 namespace WebAPI_Test.BusinessLayer.Interfaces;
 
-public interface IProductBl<TModel>
+public interface IProductBl
 {
-	public Task<List<TModel>> GetAllProducts();
-	public Task<List<TModel>> GetProductByName(string name);
-	public Task<TModel> GetProductById(Guid id);
+	public Task<List<ProductModel>> GetAllProducts();
+	public Task<List<ProductModel>> GetProductByName(string name);
+	public Task<ProductModel> GetProductById(Guid id);
 }

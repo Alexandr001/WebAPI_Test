@@ -2,9 +2,9 @@
 
 namespace WebAPI_Test.DataAccessLayer.Interfaces;
 
-public interface IProductDb<TModel>
+public interface IProductDb
 {
-	Task<List<TModel>> GetAllProducts();
-	Task<List<TModel>> GetProductByName(string name);
-	Task<TModel> GetProductsById(Guid id);
+	Task<List<ProductModel>> GetAllProducts();
+	Task<List<ProductModel>> GetProductByName(string name);
+	Task<ProductModel> GetProductsById(Guid id);
 }

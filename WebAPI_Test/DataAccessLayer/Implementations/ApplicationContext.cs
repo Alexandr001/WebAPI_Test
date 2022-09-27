@@ -18,8 +18,9 @@ public class ApplicationContext : DbContext
 	                                  "TrustServerCertificate=True";
         
 	public DbSet<ProductModel> ProductModels { get; set; } = null!;
-	public DbSet<ImageModel> ImageModels { get; set; } = null!;
- 
+	public DbSet<ImageModel>? ImageModels { get; set; }
+	public DbSet<CategoryModel>? CategoryModels { get; set; }
+
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
 		optionsBuilder.UseSqlServer(CONNECTION);

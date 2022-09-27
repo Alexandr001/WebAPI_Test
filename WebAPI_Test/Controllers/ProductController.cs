@@ -8,8 +8,8 @@ namespace WebAPI_Test.Controllers;
 [Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
-	private readonly IProductBl<ProductModel> _productBl;
-	public ProductController(IProductBl<ProductModel> productBl) => _productBl = productBl;
+	private readonly IProductBl _productBl;
+	public ProductController(IProductBl productBl) => _productBl = productBl;
 
 	[HttpGet]
 	public async Task<ActionResult<List<ProductModel>>> GetAllProducts()

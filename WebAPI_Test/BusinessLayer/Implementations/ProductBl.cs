@@ -1,24 +1,25 @@
 ﻿using WebAPI_Test.BusinessLayer.Interfaces;
 using WebAPI_Test.DataAccessLayer.Implementations;
+using WebAPI_Test.Models;
 
 namespace WebAPI_Test.BusinessLayer.Implementations;
 
-public class ProductBl<TModel> : IProductBl<TModel>
+public class ProductBl : IProductBl
 {
-	private readonly ProductDb<TModel> _productDb;
-	public ProductBl(ProductDb<TModel> productDb) => _productDb = productDb;
+	private readonly ProductDb _productDb;
+	public ProductBl(ProductDb productDb) => _productDb = productDb;
 
-	public async Task<List<TModel>> GetAllProducts()
+	public async Task<List<ProductModel>> GetAllProducts()
 	{
 		return await _productDb.GetAllProducts();
 	}
 
-	public async Task<List<TModel>> GetProductByName(string name)
+	public async Task<List<ProductModel>> GetProductByName(string name)
 	{
 		return await _productDb.GetProductByName(name);
 	}
 
-	public async Task<TModel> GetProductById(Guid id)
+	public async Task<ProductModel> GetProductById(Guid id)
 	{
 		return await _productDb.GetProductsById(id);
 	}

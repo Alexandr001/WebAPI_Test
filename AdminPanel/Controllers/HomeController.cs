@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AdminPanel.DataAccessLayer;
+using AdminPanel.DataAccessLayer.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.Controllers;
 
 public class HomeController : Controller
 {
-	public IActionResult Product() => View();
-	public IActionResult Category() => View();
-	
-	public IActionResult Ident()
+	public IActionResult Index()
 	{
-		return PartialView();
+		return View();
 	}
 }
