@@ -1,7 +1,8 @@
-﻿<h1>Введите данные</h1>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<h1>Введите данные</h1>
 
-<form accept="image/*" enctype="multipart/form-data" method="POST" name="model">
+<form asp-action="AddCategory" enctype="multipart/form-data" method="POST" name="model">
     <label>Name: </label> <input name="name" required/><br/>
-    <label>Image</label> <input type="file" name="image"><br/>
+    <label>Image</label> <input type="file" accept="image/*" name="image"><br/>
     <input type="submit" value="Send" /><br />
 </form>

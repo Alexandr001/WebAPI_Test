@@ -1,5 +1,30 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using AdminPanel.Models
+@model IEnumerable<AdminPanel.Models.ProductModel>
 @{
     ViewBag.Title = "Product";
 }
-<a href="/Product/Create">Добавить категорию</a>
-<h3>Product</h3>
+<a href="Create">Добавить товар</a>
+<h1>Список товаров:</h1>
+<table>
+<tr><th>Id</th><th>Name</th><th>Image</th><th>Price</th><th>Decription</th><th>CategoryName</th></tr>
+    @foreach (ProductModel product in Model)
+    {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Name</td>
+            <td>@product.Image</td>
+            <td>@product.Price</td>
+            <td>@product.Description</td>
+            <td>@product.CategoryId</td>
+            <td>
+                <a asp-action="EditProduct" asp-controller="Product" asp-route-id="@product.Id">Изменить</a>
+            </td>
+            <td>
+                <form asp-action="DeleteProduct" method="post" asp-route-id="@product.Id">
+                    <input type="submit" value="Удалить" />
+                </form>
+            </td>
+        </tr>
+    }
+</table>

@@ -22,13 +22,29 @@ public class CategoryDb : ICategoryDb
 		}
 	}
 
-	public Task EditCategory(CategoryModel categoryModel)
+	public async Task EditCategory(CategoryModel model)
 	{
-		throw new NotImplementedException();
+		await using (StoreContext context = new()) {
+			context.Category.Update(model);
+			await context.SaveChangesAsync();
+		}
 	}
 
-	public Task DeleteCategory(int id)
+	public async Task DeleteCategory(int id)
 	{
-		throw new NotImplementedException();
+		await using (StoreContext context = new()) {
+			CategoryModel? model = await context.Category.FindAsync(id);
+			if (model != null) {
+				context.Category.Remove(model);
+				await context.SaveChangesAsync();
+			}
+		}
+	}
+
+	public async Task<CategoryModel?> GetCategory(int id)
+	{
+		await using (StoreContext context = new()) {
+			return await context.Category.FindAsync(id);
+		}
 	}
 }

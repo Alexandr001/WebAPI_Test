@@ -6,21 +6,29 @@ namespace AdminPanel.DataAccessLayer;
 
 public class ProductDb : IProductDb
 {
-	private readonly StoreContext _context;
+	private readonly ICategoryDb _categoryDb;
 
-	public ProductDb(StoreContext context)
+	public ProductDb(ICategoryDb categoryDb)
 	{
-		_context = context;
+		_categoryDb = categoryDb;
 	}
 
 	public async Task<List<ProductModel>> GetAllProducts()
 	{
-		return await _context.Product.ToListAsync();
+		await using (StoreContext context = new()) {
+			return await context.Product.ToListAsync();
+		}
 	}
 
-	public Task AddProduct(ProductModel categoryModel)
+	public async Task AddProduct(ProductModel productModel)
 	{
-		throw new NotImplementedException();
+		if (productModel.CategoryId != null) {
+			productModel.Category = await _categoryDb.GetCategory(productModel.CategoryId.Value);
+		}
+		await using (StoreContext context = new()) {
+			await context.Product.AddAsync(productModel);
+			await context.SaveChangesAsync();
+		}
 	}
 
 	public Task EditProduct(ProductModel categoryModel)

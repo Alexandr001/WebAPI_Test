@@ -12,16 +12,35 @@ public class CategoryController : HomeController
 	{
 		_categoryDb = categoryDb;
 	}
+
 	[HttpGet]
 	public async Task<IActionResult> Category() => View(await _categoryDb.GetAllCategories());
 
 	[HttpGet]
 	public IActionResult Create() => View();
 
-	[HttpPost("/Category/Create")]
+	[HttpGet]
+	public async Task<IActionResult> Edit(int id) => View(await _categoryDb.GetCategory(id));
+
+	[HttpPost()]
 	public async Task<IActionResult> AddCategory(CategoryModel model)
 	{
 		await _categoryDb.AddCategory(model);
-		return View("Create");
+		return Ok();
 	}
+
+	[HttpPost()]
+	public async Task<IActionResult> EditCategory(CategoryModel model)
+	{
+		await _categoryDb.EditCategory(model);
+		return Ok();
+	}
+
+	[HttpPost("Delete")]
+	public async Task<IActionResult> DeleteCategory(int id)
+	{
+		await _categoryDb.DeleteCategory(id);
+		return Ok();
+	}
+	
 }

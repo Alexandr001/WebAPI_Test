@@ -1,0 +1,10 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model AdminPanel.Models.CategoryModel
+
+<form asp-action="EditCategory" enctype="multipart/form-data" method="POST" name="model">
+    <input asp-for="@Model.Id" type="hidden" />
+    <label>Name: </label> <input name="name" value="@Model.Name" required/><br/>
+    <label>Image</label> <input type="file" accept="image/*" value="@Model.Image" name="image"><br/>
+    <input type="submit" value="Send" /><br />
+</form>

@@ -8,4 +8,5 @@ public interface ICategoryDb
 	Task AddCategory(CategoryModel categoryModel);
 	Task EditCategory(CategoryModel categoryModel);
 	Task DeleteCategory(int id);
+	Task<CategoryModel?> GetCategory(int id);
 }

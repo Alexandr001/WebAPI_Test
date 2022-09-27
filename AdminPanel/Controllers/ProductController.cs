@@ -11,21 +11,15 @@ public class ProductController : HomeController
 	{
 		_productDb = productDb;
 	}
-
-	public IActionResult Product() => View(_productDb.GetAllProducts());
-	public IActionResult Create() => View();
-
 	[HttpGet]
-	public IActionResult GetAllProducts()
-	{
-		return new JsonResult(_productDb.GetAllProducts());
-	}
+	public async Task<IActionResult> Product() => View(await _productDb.GetAllProducts());
+	public IActionResult Create() => View();
 
 	[HttpPost]
 	public IActionResult AddProduct(ProductModel model)
 	{
 		_productDb.AddProduct(model);
-		return View("~/Views/Product/Product.cshtml");
+		return Ok();
 	}
 
 	[HttpPut]
@@ -39,6 +33,6 @@ public class ProductController : HomeController
 	public IActionResult DeleteProduct(int id)
 	{
 		_productDb.DeleteProduct(id);
-		return View("~/Views/Product/Product.cshtml");
+		return Ok();
 	}
 }
