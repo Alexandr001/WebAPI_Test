@@ -1,5 +1,4 @@
 ﻿using WebAPI_Test.BusinessLayer.Interfaces;
-using WebAPI_Test.DataAccessLayer.Implementations;
 using WebAPI_Test.DataAccessLayer.Interfaces;
 using WebAPI_Test.Models;
 
